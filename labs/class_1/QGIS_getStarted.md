@@ -14,11 +14,10 @@ Any version of QGIS 3 should work for our class but I'm using 3.8.3.
 ### The QGIS interface
 
 Open QGIS and create a new project. You should see QGIS' main interface.
-![alt text](/Users/avigailvantu/Documents/c4sue2021/github/c4sueSpring2021/tutorials/Class 1/QGISInterface.jpg)
+![alt text](https://github.com/avigailvantu/c4sue2021/blob/main/labs/class_1/QGISInterface.jpg)
 
 #### 1. Menu bar:
-Aamong many other functionalities, the menu bar at the top of the project will allow you to run analysis, load data, and save a project.  
-
+Among many other functionalities, the menu bar at the top of the project will allow you to run analysis, load data, and save a project.  
 
 #### 2. Browser & layer panel:
 This section on the left part of your QGIS project includes some online maps you can display and the layers that are loaded into your current project.  
@@ -70,7 +69,7 @@ To show the labels for each and every country follow these steps:
 
   Your map should look something like this:
 
-  ![alt text](/Users/avigailvantu/Documents/c4sue2021/github/c4sueSpring2021/tutorials/Class 1/Worldmap.jpg)
+  ![alt text](https://github.com/avigailvantu/c4sue2021/blob/main/labs/class_1/Worldmap.jpg)
 
 #### Save your project
   Create a C4SUE folder on your local machine.
