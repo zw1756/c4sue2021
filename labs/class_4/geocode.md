@@ -1,4 +1,4 @@
-### Class 5: Geocoding Data on QGIS Using Google API
+### Class 4: Geocoding Data on QGIS Using Google API
 
 ### Tutorial goal:
 
