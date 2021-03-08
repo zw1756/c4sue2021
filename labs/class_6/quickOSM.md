@@ -1,21 +1,21 @@
 # OpenStreetMap using QGIS
 
-As we learned, publicly available data comes from different sources. So far we focused mostly on data that comes from official and governmental sources. But there are many more sources to retrieve data. Volunteered geographic information (VGI) for example, means data was crowdsourced from people. One of the most dominant forms of VGI is the open source community around [OpenStreetMap (OSM)](https://www.openstreetmap.org/#map=14/-42.4782/-73.7652&layers=D). OSM's mission is to create an open sourced map for the entire world. The data is added by individuals and is then available for anyone to use free of charge. The data collected on OSM includes amenity data on places like hospitals, schools, fire stations and coffee shops. In addition, infrastructure data like roads and buildings is also available. Generally speaking the OSM data is considered to be very valuable. But it is most useful in places that do not collect administrative datasets (e.g. open and census data).
+As we learned, publicly available data comes from different sources. So far we focused mostly on data that comes from official and governmental sources. But there are many more sources to retrieve data from! Volunteered geographic information (VGI) for example, means data was crowdsourced from people. One of the most dominant forms of VGI is the open source community around [OpenStreetMap (OSM)](https://www.openstreetmap.org/#map=14/-42.4782/-73.7652&layers=D). OSM's mission is to create an open sourced map for the entire world. The data is added by individuals and is then available for anyone to use free of charge. The data collected on OSM includes amenity data on places like hospitals, schools, fire stations and coffee shops. In addition, infrastructure data like roads and buildings is also available. Generally speaking the OSM data is considered to be very valuable, but not 100% accurate. It is most useful in areas of the world that do not collect administrative datasets (e.g. open and census data).
 
 As a side note, OSM operates through local chapters that are in charge of gathering mappers to edit and add data in their city or community. You can find out more about it [here](https://wiki.openstreetmap.org/wiki/Foundation/Local_Chapters).
 
-OSM data can be accessed using multiple methods. Today, we will learn a method that fetches that data using an API. It is quite easy and straight forward and will load the results straight into our QGIS project.
+OSM data can be accessed using multiple methods. Today, we will learn a method that fetches that data using an API. It is quite easy and straight forward and will load the results straight into our QGIS project as a layer.
 
 ### Install the QuickOSM plugin
 
  1. On QGIS's menu bar go to Plugins
- 2. On the right menu, make sure you are on All
- 3. In the search box type : QuickOSM, and chose it from the options below
- 4. Click "Install Plugin" and wait until it's done (should take a few sec)
+ 2. On the right menu, make sure you are viewing All
+ 3. In the search box type : QuickOSM, and chose it from the options below.
+ 4. Click "Install Plugin" and wait until it's done (should take a few sec).
 
 ### Make sure the install worked:
 
-  1. After QGIS is done installing go to Vector and you should see QuickOSM as an option in the menu. Choose QuickOSM--> QuickOSM.
+  1. After QGIS is done installing go to the Vector menu. You should see QuickOSM as an option in the menu. Choose QuickOSM--> QuickOSM.
   2. The QuickOSM window will open and you will see the parameters you can change and chose for the data download (Key, Value, and a dropdown with the geographic unit that we are interested in).
 
 ### Download OSM data for Hanoi, Vietnam.
@@ -50,7 +50,7 @@ To do se we will use the "Count points in polygon" function.
 - Vector --> Geoprocessing tools --> clip
 - In Input layer: choose: amenity , and for overlay choose the Hanoi boundary.
 - Run the Clip.
-- In a few seconds you should see a new layer named: Clipped. This is the point layer that includes all points inside the Hanoit boundary.
+- In a few seconds you should see a new layer named: Clipped. This is the point layer that includes all points inside the Hanoi boundary.
 - Now you can remove the initial amenity layer and rename the clipped layer: amenity_clipped
 
 ### Select university amenity:
@@ -65,16 +65,24 @@ To do se we will use the "Count points in polygon" function.
 - the newly created layer is the university point layer.
 
 ### Calculate proximity analysis using Open Route Service
-- Download Open Route Service as a plugin.
-- To calculate proximity using the ORS service you will need an account and acquire an API key. https://openrouteservice.org/dev/#/home
-- Once you have an API Key open your ORS plugin, in the plugin setting insert the API Key.
-and https://api.openrouteservice.org in the Base URL.
-- In batch jobs choose Isochrons From Layer
-- in Input Layer choose: UniversityOSM
-- In Traverl Mode: driving-car
-- Dimension: distance
-- in the range: 500,1500,3000
-- Run the plugin.
-- You should be getting an Isochrons layer with the 500M, 1500M and 3000M distance layers.
+A great way to create a meaningful analysis is to do a network analysis. This type of analysis is common in cases where we want to understand access of a population to specific amenity (e.g. schools or hospitals). It is also a common method for emergency management. To do so we will first need to download another plugin named Open Route Service. This is another API based plugin that uses Open Street Map to calculate distances.
 
-- Create a map of 500, 1500, 3000 m proximity. Note that no submission is required for this lab.  
+- Download Open Route Service as a plugin.
+- To calculate proximity using the ORS service you will need an account and to acquire an API key.
+  1. Create account on https://openrouteservice.org/dev/#/login
+  2. Get an API token: go to the dev dashboard. On the bottom fill out the "Request a token" section and you should be getting a token.
+- Once you have the token open your ORS plugin navigate to the ORS plugin (web-->ORS tools--> ORS tools)
+- Go to the plugin setting and copy paste your newly created API key in the API KEY field, insert https://api.openrouteservice.org in the Base URL. This key should be saved for next uses of the plugin.
+
+### Analyzing access to Universities in Hanoi
+- In batch jobs choose Isochrons From Layer
+- In the Input Layer choose: UniversityOSM
+- In Travel Mode choose: driving-car
+- For Dimension: distance
+- And finally in the range write: 500,1500,3000 (this will determine the distance buffers that will be generated).
+- Run the plugin.
+
+You should be getting an Isochrons layer with 3 500M, 1500M and 3000M distance layers. The polygons are a little "funny" looking because they relay on the local street network in order to be generated (which explains why these are not perfect looking round polygons).  
+
+
+Finally, create a map of 500, 1500, 3000 m proximity. Note that no submission is required for this lab.  
